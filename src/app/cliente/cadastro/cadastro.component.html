@@ -1,0 +1,57 @@
+<h1 class="text-center text-success mb-5">Cadastrar novo CLiente</h1>
+
+
+  <form class="mt-5" #form="ngForm" (ngSubmit)="cadastrar(form)">
+    <div class="form-group mb-4">
+      <div class="row justify-content-between">
+
+
+        <!-- DADOS PESSOAIS-->
+        <div class="col-6">
+          <h3 class="text-success text-center">Dados Pessoais</h3>
+          <label for="nome" class="text-warning">Nome</label>
+          <input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="cliente.nome"/>
+
+          <label for="telefone" class="text-warning">Telefone</label>
+          <input type="text" class="form-control" id="telefone" name="telefone" aria-describedby="telefoneHelp" [(ngModel)]="cliente.telefone"/>
+          <div id="telefoneHelp" class="form-text">Insira somente números.</div>
+
+          <label for="sobrenome" class="text-warning">Conhecido de quem?</label>
+          <input type="text" class="form-control" id="conhecidoDe" name="conhecidoDe" aria-describedby="conhecidoDeHelp" [(ngModel)]="cliente.conhecidoDo"/>
+          <div id="conhecidoDeHelp" class="form-text">
+            Insira o nome da pessoa através da qual você conheceu este cliente.
+          </div>
+
+          <label for="nome" class="text-warning">CPF</label>
+          <input type="text" class="form-control" id="cpf" name="cpf" aria-describedby="cpfHelp" [(ngModel)]="cliente.cpf"/>
+          <div id="cpfHelp" class="form-text">Insira somente números.</div>
+        </div>
+
+
+        <!-- DADOS DE ENDERECO-->
+        <div class="col-6">
+          <h3 class="text-success text-center">Endereço</h3>
+
+          <label for="cidade" class="text-info">Cidade</label>
+          <input type="text" class="form-control" id="cidade" name="cidade" [(ngModel)]="cliente.cidade"/>
+
+          <label for="bairro" class="text-info">Bairro</label>
+          <input type="text" class="form-control" id="bairro" name="bairro" [(ngModel)]="cliente.bairro"/>
+
+          <label for="rua" class="text-info">Rua</label>
+          <input type="text" class="form-control" id="rua" name="rua" [(ngModel)]="cliente.rua"/>
+
+          <label for="numero" class="text-info">Número</label>
+          <input type="text" class="form-control" id="numero" name="numero" [(ngModel)]="cliente.numero"/>
+
+          <label for="numero" class="text-info">Complemento</label>
+          <input type="text" class="form-control" id="complemento" name="complemento" [(ngModel)]="cliente.complemento"/>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="d-grid gap-2">
+      <button type="submit" class="btn btn-primary btn-success">Enviar</button>
+    </div>
+  </form>

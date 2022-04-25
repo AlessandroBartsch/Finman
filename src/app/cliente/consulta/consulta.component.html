@@ -1,0 +1,26 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Telefone</th>
+      <th scope="col">Conhecido De</th>
+      <th scope="col">Endereço</th>
+      <th scope="col">CPF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cliente of clientes | async">
+      <th scope="row">{{ cliente.id }}</th>
+      <td>{{ cliente.nome }}</td>
+      <td>{{ cliente.telefone }}</td>
+      <td>{{ cliente.conhecidoDo }}</td>
+      <td>{{ cliente.endereco.cidade }} , {{ cliente.endereco.bairro }} , {{ cliente.endereco.rua }} , {{ cliente.endereco.numero }} </td>
+      <td>{{ cliente.cpf }}</td>
+      <div>
+        <span class="material-icons">delete</span>
+        <span class="material-icons">edit</span>
+      </div>
+    </tr>
+  </tbody>
+</table>
