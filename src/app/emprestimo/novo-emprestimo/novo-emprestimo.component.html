@@ -1,51 +1,123 @@
 <div p-5>
   <form [formGroup]="emprestimoFormGroup">
-    <div>
-      <mat-form-field class="cadastroMatFormField" appearance="fill">
-        <mat-label for="clienteId">ID do cliente</mat-label>
-        <input type="number" matInput formControlName="clienteId" />
-      </mat-form-field>
+    <div class="row">
+      <div class="col-8">
+
+
+        <div>
+          <mat-form-field class="m-1 cadastroMatFormField" appearance="fill">
+            <mat-label>Cliente</mat-label>
+            <mat-select formControlName="clienteId" name="clienteId">
+              <mat-option
+                *ngFor="let cliente of clientes | async"
+                [value]="cliente.id"
+              >
+                {{ cliente.nome }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="m-1 cadastroMatFormField" appearance="fill">
+            <mat-label>Tipo do empréstimo</mat-label>
+            <mat-select formControlName="tipoDeEmprestimo" name="tipoDeEmprestimo">
+              <mat-option
+                *ngFor="let tipo of tiposDeEmprestimo"
+                [value]="tipo"
+              >
+                {{ tipo }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="m-1 cadastroMatFormField" appearance="fill">
+            <mat-label for="dataPrimeiraParcela">Data primaira parcela</mat-label>
+            <input type="date" matInput formControlName="dataPrimeiraParcela" />
+          </mat-form-field>
+        </div>
+
+
+        <div>
+          <mat-form-field class="m-1 cadastroMatFormField" appearance="fill">
+            <mat-label for="porcentagemJurosPorMes">Porcentagem</mat-label>
+            <input
+              type="number"
+              matInput
+              formControlName="porcentagemJurosPorMes"
+            />
+          </mat-form-field>
+          <mat-form-field class="m-1 cadastroMatFormField" appearance="fill">
+            <mat-label for="quantidadeDeParcelas"
+              >Quantidade de parcelas</mat-label
+            >
+            <input
+              type="number"
+              matInput
+              formControlName="quantidadeDeParcelas"
+            />
+          </mat-form-field>
+          <mat-form-field class="cadastroMatFormField" appearance="fill">
+            <mat-label for="valorEmprestado">Valor emprestado</mat-label>
+            <input type="number" matInput formControlName="valorEmprestado" />
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="col-4">
+        <mat-form-field
+          style="width: 100%;"
+          class="cadastroMatFormField"
+          appearance="fill"
+        >
+          <mat-label style="height: 300px;" >Descrição do empréstimo</mat-label>
+          <textarea style="height: 150px;" matInput placeholder="Ex. Será pago a cada 2 dias o valor de xx..."></textarea>
+        </mat-form-field>
+      </div>
     </div>
 
-    <div>
-      <mat-form-field class="cadastroMatFormField" appearance="fill">
-        <mat-label for="codigo">Codigo do empréstimo</mat-label>
-        <input type="string" matInput formControlName="codigo" />
-      </mat-form-field>
-    </div>
+    <button mat-raised-button color="primary" (click)="simularEmprestimo()">
+      Simular empréstimo
+    </button>
+
+
+
+
+
+
+
+    <hr />
+
+
+
+
+
 
     <div>
-      <mat-form-field class="cadastroMatFormField" appearance="fill">
-        <mat-label for="porcentagemJurosPorMes">Porcentagem</mat-label>
-        <input type="number" matInput formControlName="porcentagemJurosPorMes" />
-      </mat-form-field>
-    </div>
+      <mat-form-field class="m-1 simularMatFormField" appearance="fill"
+      >
+      <div *ngIf="isTipoMensal; then mensalBlock; else notMensalBlock"></div>
+        <mat-label for="valorParcela">Valor da parcela</mat-label>
 
-    <div>
-      <mat-form-field class="cadastroMatFormField" appearance="fill">
-        <mat-label for="quantidadeDeParcelas">Quantidade de parcelas</mat-label>
-        <input type="number" matInput formControlName="quantidadeDeParcelas" />
-      </mat-form-field>
-    </div>
 
-    <div>
-      <mat-form-field class="cadastroMatFormField" appearance="fill">
-        <mat-label for="valorEmprestado">Valor emprestado</mat-label>
-        <input type="number" matInput formControlName="valorEmprestado" />
-      </mat-form-field>
-    </div>
+        <ng-template #mensalBlock>
+          <mat-select formControlName="valorParcelas" name="valorParcelas">
+            <mat-option
+              *ngFor="let parcela of inputValorDasParcelas"
+              [value]="parcela"
+            >
+              {{ parcela }}
+            </mat-option>
+          </mat-select>
+        </ng-template>
 
-    <button mat-raised-button color="primary" (click)="simularEmprestimo()">Simular empréstimo</button>
-
-    <hr>
-
-    <div>
-        <mat-form-field class="m-1 simularMatFormField" appearance="fill">
-          <mat-label for="valorParcela">Valor da parcela</mat-label>
+        <ng-template #notMensalBlock>
           <input type="number" matInput formControlName="valorParcela" />
           {{ inputValorDaParcela }}
-        </mat-form-field>
+        </ng-template>
 
+
+
+      </mat-form-field>
 
       <mat-form-field class="m-1 simularMatFormField" appearance="fill">
         <mat-label for="valorDoJuros">Valor em juros</mat-label>
@@ -60,9 +132,12 @@
       </mat-form-field>
     </div>
 
-    <button mat-raised-button (click)="cadastrarEmprestimo()"
-    style="background-color: green; color: white;"
-    >Finalizar empréstimo</button>
+    <button
+      mat-raised-button
+      (click)="cadastrarEmprestimo()"
+      style="background-color: green; color: white"
+    >
+      Finalizar empréstimo
+    </button>
   </form>
 </div>
-
