@@ -3,16 +3,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ClienteRoutingModule } from './cliente-routing.module';
-import { CadastroComponent } from './cadastro/cadastro.component';
 import { ClienteComponent } from './cliente.component';
-import { ConsultaComponent } from './consulta/consulta.component';
+import { NovoClienteComponent } from './novo-cliente/novo-cliente.component';
+import { ConsultarClienteComponent } from './consultar-cliente/consultar-cliente.component';
 
 
 @NgModule({
   declarations: [
-    CadastroComponent,
     ClienteComponent,
-    ConsultaComponent,
+    NovoClienteComponent,
+    ConsultarClienteComponent,
   ],
   imports: [
     CommonModule,

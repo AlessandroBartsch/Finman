@@ -1,3 +1,4 @@
+import { EmprestimoModule } from './../emprestimo/emprestimo.module';
 import { ClienteModule } from './../cliente/cliente.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,7 +17,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CommonModule,
     HomeRoutingModule,
     FontAwesomeModule,
-    ClienteModule
+    ClienteModule,
+    EmprestimoModule
   ],
   exports:[HomeComponent]
 })

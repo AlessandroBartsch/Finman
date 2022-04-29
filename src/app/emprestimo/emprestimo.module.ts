@@ -1,17 +1,34 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { EmprestimoRoutingModule } from './emprestimo-routing.module';
 import { EmprestimoComponent } from './emprestimo.component';
+import { NovoEmprestimoComponent } from './novo-emprestimo/novo-emprestimo.component';
+import { ConsultarEmprestimoComponent } from './consultar-emprestimo/consultar-emprestimo.component';
+import {MatInputModule} from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
   declarations: [
-    EmprestimoComponent
+    EmprestimoComponent,
+    NovoEmprestimoComponent,
+    ConsultarEmprestimoComponent
   ],
   imports: [
     CommonModule,
-    EmprestimoRoutingModule
+    EmprestimoRoutingModule,
+    MatStepperModule,
+    FormsModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+  ], exports: [
+    EmprestimoComponent
   ]
 })
 export class EmprestimoModule { }

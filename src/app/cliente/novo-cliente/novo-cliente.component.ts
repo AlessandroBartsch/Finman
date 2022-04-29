@@ -1,16 +1,15 @@
-import { ClientePostDTO } from './../../models/clientePostDTO';
-import { Cliente } from 'src/app/models/cliente';
+import { ClientePostDTO } from '../../models/clientePostDTO';
 import { FormsModule } from '@angular/forms';
-import { ClienteService } from './../../services/cliente.service';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ClienteService } from '../../services/cliente.service';
+import { Component, OnInit } from '@angular/core';
+
 
 @Component({
-  selector: 'app-cadastro',
-  templateUrl: './cadastro.component.html',
-  styleUrls: ['./cadastro.component.scss']
+  selector: 'app-novo-cliente',
+  templateUrl: './novo-cliente.component.html',
+  styleUrls: ['./novo-cliente.component.scss']
 })
-
-export class CadastroComponent {
+export class NovoClienteComponent {
 
   cliente : ClientePostDTO = {
     nome: '',
@@ -35,5 +34,4 @@ export class CadastroComponent {
 
     this.clienteService.salvar(this.cliente).subscribe(result =>{});
   }
-
 }

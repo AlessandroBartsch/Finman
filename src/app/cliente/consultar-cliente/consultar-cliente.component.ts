@@ -2,16 +2,13 @@ import { Observable } from 'rxjs';
 import { Cliente } from './../../models/cliente';
 import { ClienteService } from './../../services/cliente.service';
 import { Component, OnInit } from '@angular/core';
-import { faListSquares } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-consulta',
-  templateUrl: './consulta.component.html',
-  styleUrls: ['./consulta.component.scss']
+  selector: 'app-consultar-cliente',
+  templateUrl: './consultar-cliente.component.html',
+  styleUrls: ['./consultar-cliente.component.scss']
 })
-
-
-export class ConsultaComponent implements OnInit {
+export class ConsultarClienteComponent implements OnInit {
 
   clientes: Observable<Cliente[]>;
 
@@ -23,5 +20,4 @@ export class ConsultaComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
 }

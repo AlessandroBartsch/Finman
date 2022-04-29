@@ -1,5 +1,7 @@
-import { ConsultaComponent } from './../cliente/consulta/consulta.component';
-import { CadastroComponent } from './../cliente/cadastro/cadastro.component';
+import { ConsultarEmprestimoComponent } from './../emprestimo/consultar-emprestimo/consultar-emprestimo.component';
+import { NovoEmprestimoComponent } from './../emprestimo/novo-emprestimo/novo-emprestimo.component';
+import { ConsultarClienteComponent } from './../cliente/consultar-cliente/consultar-cliente.component';
+import { NovoClienteComponent } from './../cliente/novo-cliente/novo-cliente.component';
 import { EmprestimoComponent } from './../emprestimo/emprestimo.component';
 import { ClienteComponent } from './../cliente/cliente.component';
 import { HomeComponent } from './home.component';
@@ -9,12 +11,13 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {path: '', component : HomeComponent, children: [
     {path: 'cliente', component : ClienteComponent, children: [
-      {path: 'cadastro', component : CadastroComponent},
-      {path: 'consulta', component : ConsultaComponent},
+      {path: 'cadastro', component : NovoClienteComponent},
+      {path: 'consulta', component : ConsultarClienteComponent},
     ]},
     {
       path: 'emprestimo', component : EmprestimoComponent, children: [
-
+        {path: 'cadastro', component : NovoEmprestimoComponent},
+        {path: 'consulta', component : ConsultarEmprestimoComponent},
       ]
     }
   ]}

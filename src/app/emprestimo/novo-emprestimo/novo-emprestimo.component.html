@@ -1,0 +1,68 @@
+<div p-5>
+  <form [formGroup]="emprestimoFormGroup">
+    <div>
+      <mat-form-field class="cadastroMatFormField" appearance="fill">
+        <mat-label for="clienteId">ID do cliente</mat-label>
+        <input type="number" matInput formControlName="clienteId" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="cadastroMatFormField" appearance="fill">
+        <mat-label for="codigo">Codigo do empréstimo</mat-label>
+        <input type="string" matInput formControlName="codigo" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="cadastroMatFormField" appearance="fill">
+        <mat-label for="porcentagemJurosPorMes">Porcentagem</mat-label>
+        <input type="number" matInput formControlName="porcentagemJurosPorMes" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="cadastroMatFormField" appearance="fill">
+        <mat-label for="quantidadeDeParcelas">Quantidade de parcelas</mat-label>
+        <input type="number" matInput formControlName="quantidadeDeParcelas" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="cadastroMatFormField" appearance="fill">
+        <mat-label for="valorEmprestado">Valor emprestado</mat-label>
+        <input type="number" matInput formControlName="valorEmprestado" />
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="simularEmprestimo()">Simular empréstimo</button>
+
+    <hr>
+
+    <div>
+        <mat-form-field class="m-1 simularMatFormField" appearance="fill">
+          <mat-label for="valorParcela">Valor da parcela</mat-label>
+          <input type="number" matInput formControlName="valorParcela" />
+          {{ inputValorDaParcela }}
+        </mat-form-field>
+
+
+      <mat-form-field class="m-1 simularMatFormField" appearance="fill">
+        <mat-label for="valorDoJuros">Valor em juros</mat-label>
+        <input type="number" matInput formControlName="valorDoJuros" />
+        {{ inputValorDoJuros }}
+      </mat-form-field>
+
+      <mat-form-field class="m-1 simularMatFormField" appearance="fill">
+        <mat-label for="valorTotalFinal">Valor total</mat-label>
+        <input type="number" matInput formControlName="valorTotalFinal" />
+        {{ inputValorTotalFinal }}
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button (click)="cadastrarEmprestimo()"
+    style="background-color: green; color: white;"
+    >Finalizar empréstimo</button>
+  </form>
+</div>
+
