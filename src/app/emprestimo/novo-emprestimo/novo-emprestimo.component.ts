@@ -25,11 +25,12 @@ export class NovoEmprestimoComponent implements OnInit {
   inputValorDaParcela: number;
   inputValorDasParcelas: number[];
 
-
+  toppings: FormGroup;
 
 
   constructor(private formBuilder : FormBuilder,
-     private clienteService : ClienteService, emprestimoService : EmprestimoService) {
+     private clienteService : ClienteService,
+     private emprestimoService : EmprestimoService) {
        this.clientes = clienteService.buscarTodos();
      }
 
@@ -45,44 +46,37 @@ export class NovoEmprestimoComponent implements OnInit {
     console.log(this.emprestimoFormGroup.value);
   }
 
-
-
   simularEmprestimo() {
 
+    this.emprestimoService.simularEmprestimo(this.emprestimoFormGroup);
 
     if (this.emprestimoFormGroup.value.tipoDeEmprestimo == "MENSAL") {
-      console.log("MENSAL");
-
       this.isTipoMensal = true;
       this.inputValorDasParcelas = [];
+      this.inputValorTotalFinal = 0;
+      this.inputValorDoJuros = 0;
 
       const porcentagem = this.emprestimoFormGroup.value.porcentagemJurosPorMes / 100;
       const quantidadeParcelas = this.emprestimoFormGroup.value.quantidadeDeParcelas;
       const valorTotalEmprestado = this.emprestimoFormGroup.value.valorEmprestado;
-
       const valorDeCadaParcela = valorTotalEmprestado / quantidadeParcelas;
       const valorDaPorcentagem = valorDeCadaParcela * porcentagem;
 
-      console.log(valorDaPorcentagem);
-
-      for(let i:number = 0; i<quantidadeParcelas; i++)
-      {
+      for(let i:number = 0; i<quantidadeParcelas; i++){
         const valor = valorDeCadaParcela + (valorDaPorcentagem * (quantidadeParcelas - i));
-        console.log(valor);
         this.inputValorDasParcelas.push(valor);
-
+        this.inputValorTotalFinal =  this.inputValorTotalFinal + valor;
       }
+
+      this.inputValorDoJuros = (this.inputValorTotalFinal - valorTotalEmprestado);
 
     } else {
       this.isTipoMensal = false;
-
-    this.inputValorDoJuros = (this.emprestimoFormGroup.value.valorEmprestado * (this.emprestimoFormGroup.value.porcentagemJurosPorMes/100));
-    this.inputValorTotalFinal = (this.inputValorDoJuros + this.emprestimoFormGroup.value.valorEmprestado);
-    this.inputValorDaParcela = (this.inputValorTotalFinal / this.emprestimoFormGroup.value.quantidadeDeParcelas);
-
+      this.inputValorDoJuros = (this.emprestimoFormGroup.value.valorEmprestado * (this.emprestimoFormGroup.value.porcentagemJurosPorMes/100));
+      this.inputValorTotalFinal = (this.inputValorDoJuros + this.emprestimoFormGroup.value.valorEmprestado);
+      this.inputValorDaParcela = (this.inputValorTotalFinal / this.emprestimoFormGroup.value.quantidadeDeParcelas);
     }
   }
-
 
 
   configurarFormBuilder() {
@@ -95,9 +89,18 @@ export class NovoEmprestimoComponent implements OnInit {
       valorParcela: [null, null],
       valorParcelas: [[null, null]],
       valorEmprestado: [null, null],
+      descricao: [null, null],
 
       valorDoJuros: [null, null],
       valorTotalFinal: [null, null],
+
+      segunda: [false, null],
+      terca: [false, null],
+      quarta: [false, null],
+      quinta: [false, null],
+      sexta: [false, null],
+      sabado: [false, null],
+      domingo: [false, null]
     })
   }
 }

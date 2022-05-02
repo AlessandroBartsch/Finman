@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -19,6 +19,11 @@ export class EmprestimoService {
 
   getInputValorDaParcela(form, valorTotalFinal) {
     return (valorTotalFinal / form.value.quantidadeDeParcelas);
+  }
+
+  simularEmprestimo(form: FormGroup) {
+    console.log(form.value);
+
   }
 
 }

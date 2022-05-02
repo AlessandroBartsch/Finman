@@ -1,3 +1,4 @@
+import { HomeEmprestimoComponent } from './../emprestimo/homeEmprestimo/homeEmprestimo.component';
 import { ConsultarEmprestimoComponent } from './../emprestimo/consultar-emprestimo/consultar-emprestimo.component';
 import { NovoEmprestimoComponent } from './../emprestimo/novo-emprestimo/novo-emprestimo.component';
 import { ConsultarClienteComponent } from './../cliente/consultar-cliente/consultar-cliente.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
     ]},
     {
       path: 'emprestimo', component : EmprestimoComponent, children: [
+        {path: '', component: HomeEmprestimoComponent},
         {path: 'cadastro', component : NovoEmprestimoComponent},
         {path: 'consulta', component : ConsultarEmprestimoComponent},
       ]
