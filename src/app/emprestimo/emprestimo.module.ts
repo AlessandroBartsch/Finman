@@ -15,6 +15,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatCardModule,
     MatDialogModule,
     MatCheckboxModule,
-
+    MatSnackBarModule,
+    MatTableModule,
   ],
   exports: [EmprestimoComponent],
 })

@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClientePostDTO } from '../../models/clientePostDTO';
 import { FormsModule } from '@angular/forms';
 import { ClienteService } from '../../services/cliente.service';
@@ -26,12 +27,16 @@ export class NovoClienteComponent {
 
 
 
-  constructor(private clienteService : ClienteService) {}
+  constructor(private clienteService : ClienteService, private snackBar: MatSnackBar) {}
 
   cadastrar(form : FormsModule) {
     console.log(form);
     console.log(this.cliente);
 
-    this.clienteService.salvar(this.cliente).subscribe(result =>{});
+    this.clienteService.salvar(this.cliente).subscribe(result => {
+      this.snackBar.open('Cliente criado com sucesso!', '', {
+        duration: 2000
+      });
+    });
   }
 }

@@ -1,3 +1,7 @@
+import { EmprestimoResponse } from './../models/emprestimo/EmprestimoResponse';
+import { API_PATH } from './../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { EmprestimoForm } from '../models/emprestimo/EmprestimoForm';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
 
@@ -6,19 +10,19 @@ import { Injectable } from '@angular/core';
 })
 export class EmprestimoService {
 
-  constructor() { }
 
 
-  getInputValorDoJuros(valor, juros): number {
-    return valor * (juros/100);
+
+  constructor(private http : HttpClient ) {}
+
+
+  buscarTodos() {
+    return this.http.get<EmprestimoResponse[]>(`${API_PATH}emprestimo`);
   }
 
-  getInputValorTotalFinal(form, valorDoJuros) {
-    return (form.value.valorEmprestado + valorDoJuros);
-  }
-
-  getInputValorDaParcela(form, valorTotalFinal) {
-    return (valorTotalFinal / form.value.quantidadeDeParcelas);
+  cadastrar(emprestimo : EmprestimoForm) {
+    console.log(emprestimo);
+    return this.http.post<EmprestimoForm>(`${API_PATH}emprestimo`, emprestimo);
   }
 
   simularEmprestimo(form: FormGroup) {

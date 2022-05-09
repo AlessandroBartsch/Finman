@@ -1,6 +1,6 @@
 <mat-card>
   <div>
-    <form [formGroup]="emprestimoFormGroup">
+    <form [formGroup]="form">
       <div class="row">
         <div class="col-8">
           <div>
@@ -43,7 +43,7 @@
               <input
                 type="number"
                 matInput
-                formControlName="porcentagemJurosPorMes"
+                formControlName="porcentagemDoJuros"
               />
             </mat-form-field>
             <mat-form-field class="m-1 cadastroMatFormField" appearance="fill">
@@ -69,7 +69,7 @@
           </div>
 
           <div
-          *ngIf="emprestimoFormGroup.value.tipoDeEmprestimo != 'MENSAL'; then diasDaSemana; else semDiasSemana">
+          *ngIf="form.value.tipoDeEmprestimo != 'MENSAL'; then diasDaSemana; else semDiasSemana">
           </div>
           <ng-template #diasDaSemana>
             <h3>Selecione os dias da semana em que serão pagas as parcelas:</h3>

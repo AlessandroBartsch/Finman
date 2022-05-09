@@ -4,7 +4,8 @@ import { ClienteService } from './../../services/cliente.service';
 import { Cliente } from './../../models/cliente';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { TipoEmprestimo } from 'src/app/models/enums/TipoEmprestimo.enum';
+import { TipoEmprestimo } from 'src/app/models/emprestimo/TipoEmprestimo.enum';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-novo-emprestimo',
@@ -14,10 +15,10 @@ import { TipoEmprestimo } from 'src/app/models/enums/TipoEmprestimo.enum';
 export class NovoEmprestimoComponent implements OnInit {
 
 
-  emprestimoFormGroup : FormGroup;
+  form : FormGroup;
   clientes : Observable<Cliente[]>;
   clienteSelecionado : String;
-  tiposDeEmprestimo = ["DIÁRIO", "SEMANAL", "MENSAL"];
+  tiposDeEmprestimo = ["DIARIO", "SEMANAL", "MENSAL"];
   isTipoMensal = false;
 
   inputValorDoJuros: number;
@@ -30,7 +31,8 @@ export class NovoEmprestimoComponent implements OnInit {
 
   constructor(private formBuilder : FormBuilder,
      private clienteService : ClienteService,
-     private emprestimoService : EmprestimoService) {
+     private emprestimoService : EmprestimoService,
+     private snackBar: MatSnackBar) {
        this.clientes = clienteService.buscarTodos();
      }
 
@@ -43,27 +45,43 @@ export class NovoEmprestimoComponent implements OnInit {
 
 
   cadastrarEmprestimo() {
-    console.log(this.emprestimoFormGroup.value);
+    console.log(this.form.value);
+
+    this.emprestimoService.cadastrar(this.form.value).subscribe(
+      response => console.log(response),
+      error => {
+          this.snackBar.open("ERRO " + error.status + ":", "OK");
+      });
   }
+
+
+
+
 
   simularEmprestimo() {
 
-    this.emprestimoService.simularEmprestimo(this.emprestimoFormGroup);
+    /*Tentando fazer funcionar somente com este*/
+    this.emprestimoService.simularEmprestimo(this.form);
 
-    if (this.emprestimoFormGroup.value.tipoDeEmprestimo == "MENSAL") {
+    /*hoje a logica esta aqui somnete no front*/
+    if (this.form.value.tipoDeEmprestimo == "MENSAL") {
       this.isTipoMensal = true;
       this.inputValorDasParcelas = [];
       this.inputValorTotalFinal = 0;
       this.inputValorDoJuros = 0;
 
-      const porcentagem = this.emprestimoFormGroup.value.porcentagemJurosPorMes / 100;
-      const quantidadeParcelas = this.emprestimoFormGroup.value.quantidadeDeParcelas;
-      const valorTotalEmprestado = this.emprestimoFormGroup.value.valorEmprestado;
+      const porcentagem = this.form.value.porcentagemDoJuros / 100;
+      const quantidadeParcelas = this.form.value.quantidadeDeParcelas;
+      const valorTotalEmprestado = this.form.value.valorEmprestado;
       const valorDeCadaParcela = valorTotalEmprestado / quantidadeParcelas;
       const valorDaPorcentagem = valorDeCadaParcela * porcentagem;
 
+      console.log("valorDeCadaParcela: " + valorDeCadaParcela);
+      console.log("valorDaPorcentagem: " + valorDaPorcentagem);
+
       for(let i:number = 0; i<quantidadeParcelas; i++){
         const valor = valorDeCadaParcela + (valorDaPorcentagem * (quantidadeParcelas - i));
+        console.log("valorDaPorcentagem * (quantidadeParcelas - i): " + valorDaPorcentagem * (quantidadeParcelas - i));
         this.inputValorDasParcelas.push(valor);
         this.inputValorTotalFinal =  this.inputValorTotalFinal + valor;
       }
@@ -72,19 +90,23 @@ export class NovoEmprestimoComponent implements OnInit {
 
     } else {
       this.isTipoMensal = false;
-      this.inputValorDoJuros = (this.emprestimoFormGroup.value.valorEmprestado * (this.emprestimoFormGroup.value.porcentagemJurosPorMes/100));
-      this.inputValorTotalFinal = (this.inputValorDoJuros + this.emprestimoFormGroup.value.valorEmprestado);
-      this.inputValorDaParcela = (this.inputValorTotalFinal / this.emprestimoFormGroup.value.quantidadeDeParcelas);
+      this.inputValorDoJuros = (this.form.value.valorEmprestado * (this.form.value.porcentagemDoJuros/100));
+      this.inputValorTotalFinal = (this.inputValorDoJuros + this.form.value.valorEmprestado);
+      this.inputValorDaParcela = (this.inputValorTotalFinal / this.form.value.quantidadeDeParcelas);
+      console.log(this.form.value);
     }
   }
 
 
+
+
+
   configurarFormBuilder() {
-    this.emprestimoFormGroup = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       clienteId: [null, null],
       tipoDeEmprestimo: [null, null],
       dataPrimeiraParcela: [null, null],
-      porcentagemJurosPorMes: [null, null],
+      porcentagemDoJuros: [null, null],
       quantidadeDeParcelas: [null, null],
       valorParcela: [null, null],
       valorParcelas: [[null, null]],

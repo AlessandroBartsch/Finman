@@ -1,1 +1,111 @@
-<p>consultar-emprestimo works!</p>
+<table mat-table [dataSource]="emprestimos | async" class="table mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID. </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- nomeCliente Column -->
+  <ng-container matColumnDef="nomeCliente">
+    <th mat-header-cell *matHeaderCellDef> Cliente </th>
+    <td mat-cell *matCellDef="let element"> {{element.nomeCliente}} </td>
+  </ng-container>
+
+  <!-- estaEmDia Column -->
+  <ng-container matColumnDef="estaEmDia">
+    <th mat-header-cell *matHeaderCellDef> Em dia </th>
+    <td mat-cell *matCellDef="let element"> {{element.estaEmDia}} </td>
+  </ng-container>
+
+  <!-- tipoDoEmprestimo Column -->
+  <ng-container matColumnDef="quantidadeDeParcelas">
+    <th mat-header-cell *matHeaderCellDef> N. Parcelas </th>
+    <td mat-cell *matCellDef="let element"> {{element.quantidadeDeParcelas}} </td>
+  </ng-container>
+
+  <!-- quantidadeDeParcelas Column -->
+  <ng-container matColumnDef="tipoDoEmprestimo">
+    <th mat-header-cell *matHeaderCellDef> Tipo </th>
+    <td mat-cell *matCellDef="let element"> {{element.tipoDoEmprestimo}} </td>
+  </ng-container>
+
+  <!-- dataDaPrimeiraParcela Column -->
+  <ng-container matColumnDef="dataDaPrimeiraParcela">
+    <th mat-header-cell *matHeaderCellDef> Primeira parcela </th>
+    <td mat-cell *matCellDef="let element"> {{element.dataDaPrimeiraParcela}} </td>
+  </ng-container>
+
+  <!-- dataDaUltimaParcela Column -->
+  <ng-container matColumnDef="dataDaUltimaParcela">
+    <th mat-header-cell *matHeaderCellDef> Última parcela </th>
+    <td mat-cell *matCellDef="let element"> {{element.dataDaUltimaParcela}} </td>
+  </ng-container>
+
+  <!-- valorEmprestado Column -->
+  <ng-container matColumnDef="valorEmprestado">
+    <th mat-header-cell *matHeaderCellDef> Val. Emprestado </th>
+    <td mat-cell *matCellDef="let element"> {{element.valorEmprestado}} </td>
+  </ng-container>
+
+  <!-- valorEmJuros Column -->
+  <ng-container matColumnDef="valorEmJuros">
+    <th mat-header-cell *matHeaderCellDef> Val. Juros </th>
+    <td mat-cell *matCellDef="let element"> {{element.valorEmJuros}} </td>
+  </ng-container>
+
+  <!-- valorTotal Column -->
+  <ng-container matColumnDef="valorTotal">
+    <th mat-header-cell *matHeaderCellDef> Val. total </th>
+    <td mat-cell *matCellDef="let element"> {{element.valorTotal}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+
+
+
+
+<!--
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Em Dia</th>
+      <th scope="col">Cliente</th>
+      <th scope="col">Tipo</th>
+      <th scope="col">Número de parcelas</th>
+      <th scope="col">Data da primeira parcela</th>
+      <th scope="col">Data da última parcela</th>
+      <th scope="col">Valor emprestado</th>
+      <th scope="col">Valor em juros</th>
+      <th scope="col">Valor total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let emprestimo of emprestimos | async">
+      <th scope="row">{{ emprestimo.id }}</th>
+      <td>{{ emprestimo.estaEmDia }}</td>
+      <td>{{ emprestimo.nomeCliente }}</td>
+      <td>{{ emprestimo.tipoDoEmprestimo }}</td>
+      <td>{{ emprestimo.quantidadeDeParcelas }}</td>
+      <td>{{ emprestimo.dataDaPrimeiraParcela }}</td>
+      <td>{{ emprestimo.dataDaUltimaParcela }}</td>
+      <td>{{ emprestimo.valorEmprestado }} </td>
+      <td>{{ emprestimo.valorEmJuros }}</td>
+      <td>{{ emprestimo.valorTotal }}</td>
+      <div>
+        <span class="material-icons" style="color: red;">delete</span>
+        <span class="material-icons" style="color: green;" >edit</span>
+      </div>
+    </tr>
+  </tbody>
+</table>
+
+ -->
