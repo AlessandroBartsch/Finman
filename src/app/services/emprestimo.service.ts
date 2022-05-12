@@ -1,3 +1,4 @@
+import { Emprestimo } from './../emprestimo/gerenciar-emprestimo/gerenciar-emprestimo.component';
 import { EmprestimoResponse } from './../models/emprestimo/EmprestimoResponse';
 import { API_PATH } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -12,7 +13,6 @@ export class EmprestimoService {
 
 
 
-
   constructor(private http : HttpClient ) {}
 
 
@@ -20,14 +20,16 @@ export class EmprestimoService {
     return this.http.get<EmprestimoResponse[]>(`${API_PATH}emprestimo`);
   }
 
+  buscarEmprestimos() {
+    return this.http.get<Emprestimo[]>(`${API_PATH}emprestimo/entidade`);
+  }
+
   cadastrar(emprestimo : EmprestimoForm) {
-    console.log(emprestimo);
     return this.http.post<EmprestimoForm>(`${API_PATH}emprestimo`, emprestimo);
   }
 
   simularEmprestimo(form: FormGroup) {
     console.log(form.value);
-
   }
 
 }

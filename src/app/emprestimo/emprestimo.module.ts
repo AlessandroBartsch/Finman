@@ -17,6 +17,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { GerenciarEmprestimoComponent } from './gerenciar-emprestimo/gerenciar-emprestimo.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import {MatTableModule} from '@angular/material/table';
     NovoEmprestimoComponent,
     ConsultarEmprestimoComponent,
     HomeEmprestimoComponent,
+    GerenciarEmprestimoComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +43,7 @@ import {MatTableModule} from '@angular/material/table';
     MatCheckboxModule,
     MatSnackBarModule,
     MatTableModule,
+    MatPaginatorModule
   ],
   exports: [EmprestimoComponent],
 })

@@ -1,3 +1,4 @@
+import { GerenciarEmprestimoComponent } from './../emprestimo/gerenciar-emprestimo/gerenciar-emprestimo.component';
 import { HomeEmprestimoComponent } from './../emprestimo/homeEmprestimo/homeEmprestimo.component';
 import { ConsultarEmprestimoComponent } from './../emprestimo/consultar-emprestimo/consultar-emprestimo.component';
 import { NovoEmprestimoComponent } from './../emprestimo/novo-emprestimo/novo-emprestimo.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
         {path: '', component: HomeEmprestimoComponent},
         {path: 'cadastro', component : NovoEmprestimoComponent},
         {path: 'consulta', component : ConsultarEmprestimoComponent},
+        {path: 'gerenciar/:id', component : GerenciarEmprestimoComponent},
       ]
     }
   ]}

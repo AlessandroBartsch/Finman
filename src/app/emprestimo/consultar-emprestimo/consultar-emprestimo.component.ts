@@ -1,7 +1,9 @@
-import { Observable } from 'rxjs';
-import { EmprestimoService } from './../../services/emprestimo.service';
 import { EmprestimoResponse } from './../../models/emprestimo/EmprestimoResponse';
-import { Component, OnInit } from '@angular/core';
+import { EmprestimoService } from './../../services/emprestimo.service';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-consultar-emprestimo',
@@ -10,19 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 
-export class ConsultarEmprestimoComponent implements OnInit {
-
-  emprestimos: Observable<EmprestimoResponse[]>;
-
-  constructor(private emprestimoService: EmprestimoService) {
-    this.emprestimos = this.emprestimoService.buscarTodos();
-  }
-
-  ngOnInit(): void {
-    console.log("oniiiintiti");
-    this.emprestimos = this.emprestimoService.buscarTodos();
-  }
-
+export class ConsultarEmprestimoComponent {
 
   displayedColumns: string[] = [
     `id`,
@@ -34,7 +24,35 @@ export class ConsultarEmprestimoComponent implements OnInit {
     `dataDaUltimaParcela`,
     `valorEmprestado`,
     `valorEmJuros`,
-    `valorTotal`
+    `valorTotal`,
+    `actionIcons`
   ];
+  dataSource: MatTableDataSource<EmprestimoResponse>;
+  actionIcons: String;
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+
+
+  constructor(private emprestimoService : EmprestimoService) {
+    const emprestimoResponse = emprestimoService.buscarTodos();
+
+    emprestimoResponse.subscribe((response) => {
+      this.dataSource = new MatTableDataSource(response);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.actionIcons = 'input';
+    })
+  }
+
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 }
